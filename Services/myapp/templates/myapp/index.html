@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="csrf-token" content="{{ csrf_token }}">
+  <title>UI Page</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      background: #181c25;
+      color: #f4f4f4;
+      min-height: 100vh;
+      font-size: 1.15rem;
+    }
+    .container {
+      max-width: 650px;
+      margin: 80px auto;
+      background: #232937;
+      border-radius: 24px;
+      box-shadow: 0 6px 32px 0 rgba(0,0,0,0.25);
+      padding: 48px 40px 40px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.25em;
+      color: #ffb347;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+    h2 {
+      font-size: 1.3rem;
+      font-weight: 400;
+      margin-bottom: 1.5em;
+      color: #b0b8c1;
+      text-align: center;
+    }
+    .input-box {
+      width: 100%;
+      padding: 18px;
+      margin-bottom: 14px;
+      font-size: 1.25rem;
+      border-radius: 12px;
+      border: 1px solid #444a5a;
+      background: #232937;
+      color: #f4f4f4;
+      outline: none;
+      transition: border 0.2s;
+    }
+    .input-box:focus {
+      border: 1.5px solid #ffb347;
+    }
+    .output-box {
+      min-height: 90px;
+      background: #1a1e29;
+      border: 1px solid #444a5a;
+      border-radius: 12px;
+      padding: 18px;
+      font-size: 1.25rem;
+      color: #ffb347;
+      margin-bottom: 18px;
+      word-break: break-all;
+    }
+    .button-row {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+    button {
+      flex: 1;
+      padding: 14px 0;
+      font-size: 1.15rem;
+      font-weight: 600;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(90deg, #ffb347 60%, #ffcc80 100%);
+      color: #232937;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    button:hover {
+      background: linear-gradient(90deg, #ffcc80 60%, #ffb347 100%);
+      color: #181c25;
+    }
+    #getLinkBtn {
+      height: 54px !important;
+      width: 54px !important;
+      font-size: 2rem !important;
+      border-radius: 12px !important;
+    }
+    select {
+      font-size: 1.1rem !important;
+      padding: 12px 18px !important;
+      border-radius: 10px !important;
+    }
+    label[for="modelSelect"] {
+      font-size: 1.1rem !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>AI Agent: B1TD Threat Visualizer</h1>
+    <h2>Visualize and process B1TD threat data for Grafana dashboards</h2>
+    <div style="display: flex; justify-content: center; margin-bottom: 18px;">
+      <label for="modelSelect" style="margin-right: 10px; color: #b0b8c1; font-size: 1rem; align-self: center;">AI Model:</label>
+      <select id="modelSelect" style="padding: 12px 18px; border-radius: 10px; border: 1px solid #444a5a; background: #232937; color: #ffb347; font-size: 1.1rem;">
+        <option value="gpt-4.1">GPT-4.1</option>
+        <option value="claude-3.5-sonnet">Claude 3.5 Sonnet</option>
+        <option value="llama-3">Llama 3</option>
+        <option value="gemini-1.5">Gemini 1.5</option>
+      </select>
+    </div>
+    <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px;">
+      <input id="inputPrompt" class="input-box" type="text" placeholder="Enter threat data or prompt..." style="margin-bottom: 0; flex: 1;">
+      <button id="getLinkBtn" onclick="navigateToInsights()" style="flex:0 0 44px; height:54px; padding:0; font-size:2rem; display:flex; align-items:center; justify-content:center; background:#ffb347; color:#232937; border-radius:12px; margin-bottom:0;">
+        <span style="display:inline-block; transform:rotate(-45deg);">&#8594;</span>
+      </button>
+    </div>
+    <div class="button-row">
+      <button onclick="launchDashboard()">Launch</button>
+      <button onclick="copyOutput()">Copy</button>
+    </div>
+    <div id="outputBox" class="output-box" readonly></div>
+  </div>
+  <script>
+    function processInput(input) {
+      // Generate a fake Grafana dashboard link based on input and model
+      const model = document.getElementById('modelSelect').value;
+      const dashboardId = encodeURIComponent(input.trim() || "default");
+      return `https://grafana.example.com/d/${dashboardId}?model=${model}`;
+    }
+    function launchOutput() {
+      const input = document.getElementById('inputPrompt').value;
+      const processed = processInput(input);
+      document.getElementById('outputBox').textContent = processed;
+    }
+    function launchDashboard() {
+      const link = document.getElementById('outputBox').textContent;
+      if (link && link.startsWith('http')) {
+        window.open(link, '_blank');
+      }
+    }
+    function copyOutput() {
+      const output = document.getElementById('outputBox').textContent;
+      if (output) {
+        navigator.clipboard.writeText(output);
+      }
+    }
+    // Add Enter key support for input box
+    document.getElementById('inputPrompt').addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        document.getElementById('getLinkBtn').click();
+      }
+    });
+
+    async function navigateToInsights() {
+  try {
+    // Get the value from the input field
+    const inputPrompt = document.getElementById("inputPrompt").value;
+
+    // Get the CSRF token from the meta tag
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    // Make a POST request to the insights URL
+    const response = await fetch("http://127.0.0.1:8000/myapp/insights", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRFToken": csrfToken, // Include the CSRF token in the headers
+      },
+      body: JSON.stringify({ prompt: inputPrompt }), // Send the input as JSON
+    });
+
+    // Check if the response is OK
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    // Parse the JSON response
+    const data = await response.json();
+
+    // Populate the outputBox with the grafanaurl key
+    const grafanaUrl = data.grafanaurl || "No URL found in response";
+    document.getElementById("outputBox").textContent = grafanaUrl;
+  } catch (error) {
+    // Handle errors and display them in the outputBox
+    document.getElementById("outputBox").textContent = `Error: ${error.message}`;
+  }
+}
+  </script>
+</body>
+</html>
