@@ -1,0 +1,2402 @@
+{
+    "tables": [
+        {
+            "tablename": "bandwidth_dict",
+            "schema": [
+                {
+                    "columnname": "key",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "bandwidth",
+                    "columntype": "Float32"
+                }
+            ]
+        },
+        {
+            "tablename": "decision_results",
+            "schema": [
+                {
+                    "columnname": "decision_id",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "account_id",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "service",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "values",
+                    "columntype": "Array(String)"
+                }
+            ]
+        },
+        {
+            "tablename": "decision_results1",
+            "schema": [
+                {
+                    "columnname": "decision_id",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "account_id",
+                    "columntype": "String"
+                }
+            ]
+        },
+        {
+            "tablename": "td_agg_dns_combined",
+            "schema": [
+                {
+                    "columnname": "type",
+                    "columntype": "FixedString(1)"
+                },
+                {
+                    "columnname": "storage_id",
+                    "columntype": "UInt32"
+                },
+                {
+                    "columnname": "timestamp",
+                    "columntype": "DateTime"
+                },
+                {
+                    "columnname": "network",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "user",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "device_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "app_name",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "app_category",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "app_vendor",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "domain_category",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "os_version",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "mac_address",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "dhcp_fingerprint",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "count",
+                    "columntype": "UInt32"
+                }
+            ]
+        },
+        {
+            "tablename": "td_agg_dns_security",
+            "schema": [
+                {
+                    "columnname": "type",
+                    "columntype": "FixedString(1)"
+                },
+                {
+                    "columnname": "storage_id",
+                    "columntype": "UInt32"
+                },
+                {
+                    "columnname": "timestamp",
+                    "columntype": "DateTime"
+                },
+                {
+                    "columnname": "network",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "count",
+                    "columntype": "UInt32"
+                }
+            ]
+        },
+        {
+            "tablename": "td_agg_ipsummary",
+            "schema": [
+                {
+                    "columnname": "storage_id",
+                    "columntype": "Int32"
+                },
+                {
+                    "columnname": "qip",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "device_id",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "pid",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "tclass",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "tfamily",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "threat_indicator",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "cid",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "cmac",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "os_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "os_version",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "actor_id",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "actor_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "actor_description",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "user",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "location",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "action",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "target",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "feed_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "correlation_action",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "excluded",
+                    "columntype": "UInt64"
+                },
+                {
+                    "columnname": "confidence_score",
+                    "columntype": "Float64"
+                },
+                {
+                    "columnname": "threat_score",
+                    "columntype": "Float64"
+                },
+                {
+                    "columnname": "timestamp",
+                    "columntype": "DateTime64(3)"
+                },
+                {
+                    "columnname": "threat_level",
+                    "columntype": "UInt32"
+                },
+                {
+                    "columnname": "confidence_level",
+                    "columntype": "UInt32"
+                },
+                {
+                    "columnname": "count",
+                    "columntype": "UInt64"
+                }
+            ]
+        },
+        {
+            "tablename": "td_agg_ipsummary_queue",
+            "schema": [
+                {
+                    "columnname": "all_json",
+                    "columntype": "String"
+                }
+            ]
+        },
+        {
+            "tablename": "td_agg_rpz_combined",
+            "schema": [
+                {
+                    "columnname": "type",
+                    "columntype": "FixedString(1)"
+                },
+                {
+                    "columnname": "storage_id",
+                    "columntype": "UInt32"
+                },
+                {
+                    "columnname": "timestamp",
+                    "columntype": "DateTime"
+                },
+                {
+                    "columnname": "policy_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "policy_action",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "tclass",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "tproperty",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "user",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "device_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "mac_address",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "dhcp_fingerprint",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "os_version",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "severity",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "network",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "confidence",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "threat_indicator",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "feed_name",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "app_name",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "app_category",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "app_vendor",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "category",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "count",
+                    "columntype": "UInt32"
+                }
+            ]
+        },
+        {
+            "tablename": "td_agg_rpz_security",
+            "schema": [
+                {
+                    "columnname": "type",
+                    "columntype": "FixedString(1)"
+                },
+                {
+                    "columnname": "storage_id",
+                    "columntype": "UInt32"
+                },
+                {
+                    "columnname": "timestamp",
+                    "columntype": "DateTime"
+                },
+                {
+                    "columnname": "policy_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "tclass",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "severity",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "network",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "feed_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "count",
+                    "columntype": "UInt32"
+                }
+            ]
+        },
+        {
+            "tablename": "td_agg_security_asset_mapping",
+            "schema": [
+                {
+                    "columnname": "type",
+                    "columntype": "FixedString(1)"
+                },
+                {
+                    "columnname": "storage_id",
+                    "columntype": "UInt32"
+                },
+                {
+                    "columnname": "timestamp_day",
+                    "columntype": "DateTime"
+                },
+                {
+                    "columnname": "tclass",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "tproperty",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "tfamily",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "threat_indicator",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "super_category",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "severity",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "confidence",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "asset_cq_id",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "device_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "ip_address",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "location",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "location_type",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "country",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "region",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "vendor",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "asset_category",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "os",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "provider",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "source",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "user_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "mac_address",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "policy_action",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "feed_name",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "classification",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "sub_classification",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "asset_confidence",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "indicator",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "registration_indicator",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "registration_status",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "dhcp_fingerprint",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "secondary_provider",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "cloud_account_id",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "managed",
+                    "columntype": "Bool"
+                },
+                {
+                    "columnname": "source_job",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "count",
+                    "columntype": "SimpleAggregateFunction(sum, UInt64)"
+                },
+                {
+                    "columnname": "min_timestamp",
+                    "columntype": "SimpleAggregateFunction(min, DateTime)"
+                },
+                {
+                    "columnname": "max_timestamp",
+                    "columntype": "SimpleAggregateFunction(max, DateTime)"
+                }
+            ]
+        },
+        {
+            "tablename": "td_agg_security_known_assets",
+            "schema": [
+                {
+                    "columnname": "storage_id",
+                    "columntype": "UInt32"
+                },
+                {
+                    "columnname": "timestamp_day",
+                    "columntype": "DateTime"
+                },
+                {
+                    "columnname": "tclass",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "tproperty",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "tfamily",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "threat_indicator",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "severity",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "confidence",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "asset_cq_id",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "policy_action",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "feed_name",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "count",
+                    "columntype": "SimpleAggregateFunction(sum, UInt64)"
+                },
+                {
+                    "columnname": "min_timestamp",
+                    "columntype": "SimpleAggregateFunction(min, DateTime)"
+                },
+                {
+                    "columnname": "max_timestamp",
+                    "columntype": "SimpleAggregateFunction(max, DateTime)"
+                }
+            ]
+        },
+        {
+            "tablename": "td_agg_soc_asset_mapping",
+            "schema": [
+                {
+                    "columnname": "asset_cqid",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "device_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "ip_address",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "super_category",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "location",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "location_type",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "country",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "region",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "vendor",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "asset_category",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "os",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "provider",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "source",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "user_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "mac_address",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "storage_id",
+                    "columntype": "UInt32"
+                },
+                {
+                    "columnname": "tclass",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "tfamily",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "feed_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "classification",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "sub_classification",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "asset_confidence",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "indicator",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "registration_indicator",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "registration_status",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "dhcp_fingerprint",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "secondary_provider",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "cloud_account_id",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "managed",
+                    "columntype": "Bool"
+                },
+                {
+                    "columnname": "threat_level",
+                    "columntype": "UInt32"
+                },
+                {
+                    "columnname": "source_job",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "timestamp",
+                    "columntype": "DateTime64(3)"
+                },
+                {
+                    "columnname": "count",
+                    "columntype": "SimpleAggregateFunction(sum, UInt64)"
+                }
+            ]
+        },
+        {
+            "tablename": "td_agg_soc_asset_mapping_raw_asset",
+            "schema": [
+                {
+                    "columnname": "asset_cqid",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "device_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "ip_address",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "super_category",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "location",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "location_type",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "country",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "region",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "vendor",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "asset_category",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "os",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "provider",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "source",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "user_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "mac_address",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "storage_id",
+                    "columntype": "UInt32"
+                },
+                {
+                    "columnname": "tclass",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "tfamily",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "feed_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "classification",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "sub_classification",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "asset_confidence",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "indicator",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "registration_indicator",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "registration_status",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "dhcp_fingerprint",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "secondary_provider",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "cloud_account_id",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "managed",
+                    "columntype": "Bool"
+                },
+                {
+                    "columnname": "threat_level",
+                    "columntype": "UInt32"
+                },
+                {
+                    "columnname": "timestamp",
+                    "columntype": "DateTime64(3)"
+                },
+                {
+                    "columnname": "min_timestamp",
+                    "columntype": "SimpleAggregateFunction(min, DateTime)"
+                },
+                {
+                    "columnname": "max_timestamp",
+                    "columntype": "SimpleAggregateFunction(max, DateTime)"
+                },
+                {
+                    "columnname": "count",
+                    "columntype": "SimpleAggregateFunction(sum, UInt64)"
+                }
+            ]
+        },
+        {
+            "tablename": "td_agg_soc_known_assets",
+            "schema": [
+                {
+                    "columnname": "storage_id",
+                    "columntype": "UInt32"
+                },
+                {
+                    "columnname": "timestamp",
+                    "columntype": "DateTime64(3)"
+                },
+                {
+                    "columnname": "tclass",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "tfamily",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "threat_level",
+                    "columntype": "UInt32"
+                },
+                {
+                    "columnname": "asset_cqid",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "feed_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "count",
+                    "columntype": "SimpleAggregateFunction(sum, UInt64)"
+                }
+            ]
+        },
+        {
+            "tablename": "td_agg_threat",
+            "schema": [
+                {
+                    "columnname": "storage_id",
+                    "columntype": "UInt32"
+                },
+                {
+                    "columnname": "timestamp_day",
+                    "columntype": "DateTime"
+                },
+                {
+                    "columnname": "type",
+                    "columntype": "FixedString(1)"
+                },
+                {
+                    "columnname": "policy_action",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "tclass",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "tproperty",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "tfamily",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "severity",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "confidence",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "category",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "threat_type",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "threat_technique",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "threat_classification",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "feed_name",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "response_region",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "response_country",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "device_region",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "device_country",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "threat_indicator",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "asset_cq_id",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "qip",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "device_type",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "actor_id",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "actor_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "policy_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "network",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "bandwidth",
+                    "columntype": "Float32"
+                },
+                {
+                    "columnname": "bandwidth_total",
+                    "columntype": "SimpleAggregateFunction(sum, Float64)"
+                },
+                {
+                    "columnname": "count",
+                    "columntype": "SimpleAggregateFunction(sum, UInt64)"
+                },
+                {
+                    "columnname": "min_timestamp",
+                    "columntype": "SimpleAggregateFunction(min, DateTime)"
+                },
+                {
+                    "columnname": "max_timestamp",
+                    "columntype": "SimpleAggregateFunction(max, DateTime)"
+                }
+            ]
+        },
+        {
+            "tablename": "td_agg_webcontent",
+            "schema": [
+                {
+                    "columnname": "type",
+                    "columntype": "FixedString(1)"
+                },
+                {
+                    "columnname": "storage_id",
+                    "columntype": "UInt32"
+                },
+                {
+                    "columnname": "timestamp",
+                    "columntype": "DateTime"
+                },
+                {
+                    "columnname": "policy_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "policy_action",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "network",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "category",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "count",
+                    "columntype": "UInt32"
+                }
+            ]
+        },
+        {
+            "tablename": "td_raw_asset",
+            "schema": [
+                {
+                    "columnname": "asset_cqid",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "device_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "ip_address",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "super_category",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "location",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "country",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "region",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "vendor",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "category",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "os",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "provider",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "source",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "user_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "mac_address",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "location_type",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "classification",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "sub_classification",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "confidence",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "indicator",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "registration_indicator",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "registration_status",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "dhcp_fingerprint",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "secondary_provider",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "cloud_account_id",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "managed",
+                    "columntype": "Bool"
+                },
+                {
+                    "columnname": "account_id",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "source_job",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "kafka_timestamp",
+                    "columntype": "DateTime"
+                }
+            ]
+        },
+        {
+            "tablename": "td_raw_asset_queue",
+            "schema": [
+                {
+                    "columnname": "asset_cq_id",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "device_name",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "ip_address",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "super_category",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "location",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "country",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "region",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "vendor",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "category",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "os",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "provider",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "source",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "user_name",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "mac_address",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "location_type",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "classification",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "sub_classification",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "confidence",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "indicator",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "registration_indicator",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "registration_status",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "dhcp_fingerprint",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "secondary_provider",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "cloud_account_id",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "managed",
+                    "columntype": "Bool"
+                },
+                {
+                    "columnname": "account_id",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "source_job",
+                    "columntype": "Nullable(String)"
+                }
+            ]
+        },
+        {
+            "tablename": "td_raw_asset_test",
+            "schema": [
+                {
+                    "columnname": "asset_cqid",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "device_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "ip_address",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "super_category",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "location",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "country",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "region",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "vendor",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "category",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "os",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "provider",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "source",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "user_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "mac_address",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "location_type",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "classification",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "sub_classification",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "confidence",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "indicator",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "registration_indicator",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "registration_status",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "dhcp_fingerprint",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "secondary_provider",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "cloud_account_id",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "managed",
+                    "columntype": "Bool"
+                },
+                {
+                    "columnname": "kafka_timestamp",
+                    "columntype": "DateTime"
+                }
+            ]
+        },
+        {
+            "tablename": "td_raw_detections",
+            "schema": [
+                {
+                    "columnname": "type",
+                    "columntype": "FixedString(1)"
+                },
+                {
+                    "columnname": "storage_id",
+                    "columntype": "Int32"
+                },
+                {
+                    "columnname": "timestampStartOfHour",
+                    "columntype": "DateTime"
+                },
+                {
+                    "columnname": "timestamp",
+                    "columntype": "DateTime"
+                },
+                {
+                    "columnname": "qip",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "qname",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "network",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "user",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "device_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "pid",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "severity",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "confidence",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "country",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "ttl",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "rcode",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "dsource",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "tclass",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "tproperty",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "policy_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "expiry_time",
+                    "columntype": "DateTime"
+                },
+                {
+                    "columnname": "feed_name",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "policy_action",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "qname_rev",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "query_type",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "refined_at",
+                    "columntype": "DateTime"
+                },
+                {
+                    "columnname": "event_date",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "os_version",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "mac_address",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "private_ip",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "feed_type",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "tfamily",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "detections_count",
+                    "columntype": "Int32"
+                },
+                {
+                    "columnname": "excluded",
+                    "columntype": "UInt64"
+                },
+                {
+                    "columnname": "kafka_partition",
+                    "columntype": "Int8"
+                },
+                {
+                    "columnname": "kafka_offset",
+                    "columntype": "UInt64"
+                }
+            ]
+        },
+        {
+            "tablename": "td_raw_detections_queue",
+            "schema": [
+                {
+                    "columnname": "type",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "storage_id",
+                    "columntype": "Int32"
+                },
+                {
+                    "columnname": "timestamp",
+                    "columntype": "DateTime64(3)"
+                },
+                {
+                    "columnname": "qip",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "qname",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "network",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "user",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "device_name",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "pid",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "severity",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "confidence",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "country",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "ttl",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "rcode",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "dsource",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "tclass",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "tproperty",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "policy_name",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "expiry_time",
+                    "columntype": "DateTime64(0)"
+                },
+                {
+                    "columnname": "feed_name",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "policy_action",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "qname_rev",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "query_type",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "refined_at",
+                    "columntype": "DateTime64(0)"
+                },
+                {
+                    "columnname": "event_date",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "os_version",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "mac_address",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "private_ip",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "feed_type",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "tfamily",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "detections_count",
+                    "columntype": "Int32"
+                },
+                {
+                    "columnname": "excluded",
+                    "columntype": "UInt64"
+                }
+            ]
+        },
+        {
+            "tablename": "td_raw_dns",
+            "schema": [
+                {
+                    "columnname": "type",
+                    "columntype": "FixedString(1)"
+                },
+                {
+                    "columnname": "storage_id",
+                    "columntype": "UInt32"
+                },
+                {
+                    "columnname": "timestampStartOfHour",
+                    "columntype": "DateTime"
+                },
+                {
+                    "columnname": "timestamp",
+                    "columntype": "DateTime64(3)"
+                },
+                {
+                    "columnname": "qname",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "domain",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "query_type",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "qtype",
+                    "columntype": "UInt16"
+                },
+                {
+                    "columnname": "response",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "qip",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "rip",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "policy_id",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "source",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "dns_view",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "network",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "user",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "device_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "os_version",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "mac_address",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "dhcp_fingerprint",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "pname",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "refined_at",
+                    "columntype": "DateTime"
+                },
+                {
+                    "columnname": "sld",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "app_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "app_category",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "response_region",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "response_country",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "device_region",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "device_country",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "app_vendor",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "domain_category",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "kafka_partition",
+                    "columntype": "Int8"
+                },
+                {
+                    "columnname": "kafka_offset",
+                    "columntype": "UInt64"
+                }
+            ]
+        },
+        {
+            "tablename": "td_raw_dns_queue",
+            "schema": [
+                {
+                    "columnname": "type",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "storage_id",
+                    "columntype": "UInt32"
+                },
+                {
+                    "columnname": "timestamp",
+                    "columntype": "DateTime64(3)"
+                },
+                {
+                    "columnname": "qname",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "query_type",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "qtype",
+                    "columntype": "UInt16"
+                },
+                {
+                    "columnname": "response",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "qip",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "rip",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "policy_id",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "source",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "dns_view",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "network",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "user",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "device_name",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "os_version",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "mac_address",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "dhcp_fingerprint",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "pname",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "refined_at",
+                    "columntype": "DateTime"
+                },
+                {
+                    "columnname": "sld",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "app_name",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "app_category",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "response_region",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "response_country",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "device_region",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "device_country",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "app_vendor",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "domain_category",
+                    "columntype": "Nullable(String)"
+                }
+            ]
+        },
+        {
+            "tablename": "td_raw_rpz",
+            "schema": [
+                {
+                    "columnname": "type",
+                    "columntype": "FixedString(1)"
+                },
+                {
+                    "columnname": "storage_id",
+                    "columntype": "UInt32"
+                },
+                {
+                    "columnname": "timestampStartOfHour",
+                    "columntype": "DateTime"
+                },
+                {
+                    "columnname": "timestamp",
+                    "columntype": "DateTime64(3)"
+                },
+                {
+                    "columnname": "qname",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "domain",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "query_type",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "qtype",
+                    "columntype": "UInt16"
+                },
+                {
+                    "columnname": "opcode",
+                    "columntype": "UInt16"
+                },
+                {
+                    "columnname": "response",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "qip",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "rip",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "policy_id",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "policy_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "policy_action",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "threat_indicator",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "private_ip",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "severity",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "tclass",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "tproperty",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "tfamily",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "confidence",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "feed_name",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "category",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "feed_type",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "device_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "mac_address",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "dhcp_fingerprint",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "os_version",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "user",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "network",
+                    "columntype": "LowCardinality(String)"
+                },
+                {
+                    "columnname": "country",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "source",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "cid",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "dns_view",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "pname",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "refined_at",
+                    "columntype": "DateTime"
+                },
+                {
+                    "columnname": "sld",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "app_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "app_category",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "response_region",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "response_country",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "device_region",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "device_country",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "app_vendor",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "actor_id",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "device_id",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "device_type",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "actor_name",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "excluded",
+                    "columntype": "UInt64"
+                },
+                {
+                    "columnname": "kafka_partition",
+                    "columntype": "Int8"
+                },
+                {
+                    "columnname": "kafka_offset",
+                    "columntype": "UInt64"
+                }
+            ]
+        },
+        {
+            "tablename": "td_raw_rpz_queue",
+            "schema": [
+                {
+                    "columnname": "type",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "storage_id",
+                    "columntype": "UInt32"
+                },
+                {
+                    "columnname": "timestamp",
+                    "columntype": "DateTime64(3)"
+                },
+                {
+                    "columnname": "qname",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "query_type",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "qtype",
+                    "columntype": "UInt16"
+                },
+                {
+                    "columnname": "opcode",
+                    "columntype": "UInt16"
+                },
+                {
+                    "columnname": "response",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "qip",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "rip",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "policy_id",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "policy_name",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "policy_action",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "threat_indicator",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "private_ip",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "severity",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "tclass",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "tproperty",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "tfamily",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "confidence",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "feed_name",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "category",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "feed_type",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "device_name",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "mac_address",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "dhcp_fingerprint",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "os_version",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "user",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "network",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "country",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "source",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "cid",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "dns_view",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "pname",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "refined_at",
+                    "columntype": "DateTime"
+                },
+                {
+                    "columnname": "sld",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "app_name",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "app_category",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "response_region",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "response_country",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "device_region",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "device_country",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "app_vendor",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "actor_id",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "device_id",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "device_type",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "actor_name",
+                    "columntype": "Nullable(String)"
+                },
+                {
+                    "columnname": "excluded",
+                    "columntype": "UInt64"
+                }
+            ]
+        },
+        {
+            "tablename": "test_table",
+            "schema": [
+                {
+                    "columnname": "id",
+                    "columntype": "String"
+                },
+                {
+                    "columnname": "tags1",
+                    "columntype": "Array(String)"
+                },
+                {
+                    "columnname": "tags2",
+                    "columntype": "Array(String)"
+                }
+            ]
+        }
+    ]
+}
