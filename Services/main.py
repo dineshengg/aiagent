@@ -5,6 +5,9 @@ import argparse
 import re
 from datetime import datetime, timedelta
 import asyncio
+
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+#from Services.functools import listdatabases, listtables, runselectquery
 from dotenv import load_dotenv
 
 
@@ -25,31 +28,60 @@ else:
     print(f"OpenAI API Base: {API_BASE}")
     #lord murugan
 
+sys.path.append("../mcp-clickhouse/.venv/lib/python3.13/site-packages")
+# Add the openai-agents-python/src to the path to properly access the agents module
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '../openai-agents-python/src'))
+sys.path.append("/Users/dkumar1/Projects/Threatdefence/github/aiagent/mcp-clickhouse/.venv/lib/python3.13/site-packages")
 current_dir = os.getcwd()
 path_to_add = os.path.join(current_dir, '../mcp-clickhouse')
 if not os.path.exists(path_to_add):
     os.makedirs(path_to_add)
  
 sys.path.append(path_to_add)
- 
-print(path_to_add)
 
-sys.path.append("/Users/dkumar1/Projects/Threatdefence/github/aiagent/mcp-clickhouse/.venv/lib/python3.13/site-packages")
-
-
+from agents import function_tool
+import mcp_clickhouse.mcp_server as mcp_my_app
 # Import MCP server clients
-from mcp_clickhouse.mcp_server import mcp, create_clickhouse_client, list_databases, list_tables, run_select_query
+from mcp_clickhouse.mcp_server import list_databases, list_tables, run_select_query
+# Import MCP server clients
+from mcp_clickhouse.mcp_server import mcp, create_clickhouse_client
 
-from mcp_grafana_client import create_grafana_client
+from mcp_grafana_client import create_grafana_client, create_dashboard
+from typing import Any
+
+demodashboard = 1
 
 # Add the openai-agents-python/src to the path to properly access the agents module
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)), '../openai-agents-python/src'))
 #print(sys.path)
 
+@function_tool
+async def list_databases()-> list:
+    """List database."""
+    #print("getting database", type(list_databases()))
+    print("getting database-1")
+    return ["reports"]
+    #return ["reports"]
+
+@function_tool
+async def list_tables(database: str) -> list[dict[str, Any]]:
+    """List all tables."""
+    print("list tables -2", database)
+    # query = "SELECT COLUMN_NAME AS name, DATA_TYPE AS type FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA = 'reports'"
+    # result = mcp_my_app.runselectquery(query)
+    # print("queries result", query)
+    return mcp_my_app.list_tables(database)
+    
+@function_tool
+async def run_select_query(query: str) -> str:
+    """Run a SELECT query."""
+    temp = mcp_my_app.run_select_query(query)
+    print("running query returned", temp)
+    return temp
 
 try:
     from openai import AsyncOpenAI, AsyncAzureOpenAI
-    from agents import Agent, Runner, function_tool, set_tracing_disabled, set_default_openai_client, set_default_openai_api
+    from agents import Agent, Runner, set_tracing_disabled, set_default_openai_client, set_default_openai_api
     USING_AGENTS_SDK = True
     print("Successfully imported OpenAI Agents SDK", file=sys.stderr)
 except ImportError as e:
@@ -59,6 +91,8 @@ except ImportError as e:
 
 #client = AsyncOpenAI(base_url=API_BASE, api_key=API_KEY)
 #set_tracing_disabled(disabled=True)
+
+
 
 client = AsyncAzureOpenAI(
          api_key=API_KEY,
@@ -86,24 +120,7 @@ def load_schema_from_file(schema_file):
         print(f"Error loading schema file: {e}", file=sys.stderr)
         return None
     
-@function_tool
-def list_databases_reports()-> list:
-    """List all databases."""
-    print("getting database", type(list_databases()))
-    return "reports"
-    #return ["reports"]
 
-@function_tool
-def list_tables_reports(database: str):
-    """List all tables in the reports"""
-    return list_tables(database)
-    
-@function_tool
-def run_select_query_reports(query: str):
-    """Run a SELECT query on reports."""
-    temp = run_select_query(query)
-    print("running query returned", temp)
-    return temp
     
 
     
@@ -122,24 +139,26 @@ async def setup_mcp_servers():
 
         # List available tools for ClickHouse
 
-        clickhouse_tools = [list_databases_reports, list_tables_reports, run_select_query_reports]
+        clickhouse_tools = [list_databases, list_tables, run_select_query]
         print(f"Available ClickHouse tools: {[tool.name for tool in clickhouse_tools]}", file=sys.stderr)
     except Exception as e:
         print(f"Error setting up ClickHouse MCP server: {e}", file=sys.stderr)
 
     try:
         # Set up Grafana MCP server
-        grafana_server = create_grafana_client()
-        await grafana_server.connect()
-        print(f"Connected to Grafana MCP server: {grafana_server.name}", file=sys.stderr)
+        grafana_server = create_grafana_client("", "", 30, False)
+        #await grafana_server.connect()
+        #print(f"Connected to Grafana MCP server: {grafana_server.name}", file=sys.stderr)
+        print("Grafana server url: ", grafana_server.server_url)
+        print("Grafana server api key: ", grafana_server.api_key)
 
         # List available tools for Grafana
-        grafana_tools = await grafana_server.list_tools()
-        print(f"Avaixlable Grafana tools: {[tool.name for tool in grafana_tools]}", file=sys.stderr)
+        #grafana_tools = await grafana_server.list_tools()
+        #print(f"Avaixlable Grafana tools: {[tool.name for tool in grafana_tools]}", file=sys.stderr)
     except Exception as e:
         print(f"Error setting up Grafana MCP server: {e}", file=sys.stderr)
 
-    return clickhouse_server, None
+    return clickhouse_server, grafana_server
 
 
 async def nl_to_sql_with_mcp(natural_language_query, table_schema, clickhouse_server=None, grafana_server=None):
@@ -152,14 +171,41 @@ async def nl_to_sql_with_mcp(natural_language_query, table_schema, clickhouse_se
 
     try:
         # Create a system prompt that includes the schema and task
-        instructions = f"""You are a SQL expert. Use reports database, write a SQL query that answers the user's question.
+        # Example schema fetched from MCP protocol
+        database_name = "reports"
+        #table_name = "example_table"
+        column_list = ["timestamp", "metric_value", "category"]
 
-Database:
-{"reports"}
+        # Generate the prompt
+        # prompt = f"""You are a SQL expert. Given the following database schema, write a SQL query that answers the user's question.
 
-Current date: {datetime.now().strftime("%Y-%m-%d")}
+        # query tool list database use reports in it and then query the tool List all tables to get the list of table and then execute Run a SELECT query to get the table schema don't use any generic table or schemas
 
-Respond ONLY with the SQL query, no explanations or additional text."""
+        # Current date: {datetime.now().strftime("%Y-%m-%d")}.
+        # Please include the timestamp column if present in table and provide SELECT query as it needs to be displayed in grafana dashbaord
+
+        # Respond ONLY with the SQL query, no explanations or additional text."""
+
+        prompt = f"""You are a SQL expert. Write an SQL query that retrieves data for a time-series graph to be displayed in a Grafana dashboard.
+        The query should:
+        1. Include a `timestamp` column for the x-axis of the time-series graph.
+        2. Fetch relevant metrics or values for the y-axis
+        3. Use the database and table schema provided below.
+        4. Limit the results to 1000 rows for performance.
+        5. Use the tool list_databases, list_tables and run_select_query to get the sql query.
+        6. Do not rely on your own knowledge.
+        7. Give the sql query in one line no line break.
+        8. Wait for the tool result if not throw error
+        
+
+        Respond ONLY with the SQL query. Do not include explanations or additional text."""
+
+        #- Table: {table_name}
+        #Database and Table Schema:
+        #- Database: {database_name}
+        
+
+        #print(prompt)   
 
         # list_databases.name = "List Database"
         # list_tables.name = "List tables in reports database"
@@ -168,10 +214,10 @@ Respond ONLY with the SQL query, no explanations or additional text."""
         if mcp:
             agent = Agent(
                 name="SQL Generator (ClickHouse)",
-                instructions=instructions,
-                mcp_servers=[mcp],
+                instructions=prompt,
+                #mcp_servers=[mcp],
                 model=DEPLOYMENT_NAME,
-                tools=[list_databases_reports, list_tables_reports, run_select_query_reports]
+                tools=[list_databases, list_tables, run_select_query]
                 
             )
            
@@ -268,6 +314,60 @@ async def interactive_mode_async(table_schema, verbose=False, clickhouse_server=
 
     return history
 
+async def process_grafana_asynch(grafana_server, sql_query, json_content):
+    print("process_grafana_asynch")
+    global demodashboard
+    demodashboard +=1
+    dashbooard_title = f"B1TD Dashboard {demodashboard}"
+    processed_json_content = generate_grafana_json(json_content, dashbooard_title, sql_query)
+    print("generate_grafana_json")
+    dashboard = create_dashboard(grafana_server, processed_json_content)
+    print("create_dashboard")
+    if dashboard:
+        #print(f"Dashboard created successfully: {da    shboard.title} (UID: {dashboard.uid})")
+        print(f"Dashboard created successfully! UID: {dashboard.uid}, URL: {dashboard.url}")
+        print(f"Grafana URL: {grafana_server.server_url}{dashboard.url}")
+        return f"http://localhost:3000{dashboard.url}"  
+    else:
+        pass
+        
+def generate_grafana_json(json_content: str, dashboard_title: str, sql_query: str) -> str:
+    """Generate a Grafana JSON dashboard."""
+    try:
+        with open(json_content, 'r') as file:
+            json_content = file.read()
+ 
+        #print("Template content: ", json_content)
+ 
+        replacements = {
+            "{{TITLE}}": dashboard_title,
+            "{{SQL_QUERY}}": sql_query
+        }
+ 
+        # Process the replacements directly on the content string
+        #print("Template content: ", json_content)
+        processed_content = json_content
+        for placeholder, value in replacements.items():
+            processed_content = processed_content.replace(placeholder, str(value))
+        
+        # Validate the result is valid JSON
+        try:
+            json.loads(processed_content)
+        except json.JSONDecodeError as e:
+            raise ValueError(f"Template processing resulted in invalid JSON: {str(e)}")
+ 
+        #print("Processed content: ", processed_content)
+ 
+        return processed_content
+        
+    except FileNotFoundError:
+        print(f"Error: Dashboard file not found: {json_content}")
+        sys.exit(1)
+        
+    except Exception as e:
+        print(f"Error creating dashboard: {str(e)}")
+        sys.exit(1)
+
 
 async def main_async():
     parser = argparse.ArgumentParser(description='Convert natural language to SQL queries')
@@ -288,12 +388,15 @@ async def main_async():
     clickhouse_server, grafana_server = await setup_mcp_servers()
 
     try:
-        # Interactive mode takes precedence
+        #Interactive mode takes precedence
         if args.interactive or args.query is None:
             await interactive_mode_async(table_schema, args.verbose, clickhouse_server, grafana_server)
         else:
-            # Single query mode
-            await process_query_async(args.query, table_schema, args.verbose, clickhouse_server, grafana_server)
+            #Single query mode
+            sqlquery = await process_query_async(args.query, table_schema, args.verbose, clickhouse_server, grafana_server)
+        #sqlquery = "SELECT timestamp, storage_id FROM td_agg_rpz_combined limit 1000"
+            jsonfile = "json-templates/createdashboarddemo.json"
+            dashboard_url = await process_grafana_asynch(grafana_server, sqlquery, jsonfile)
     finally:
         # Clean up MCP servers if they were created
         if clickhouse_server:
@@ -311,3 +414,80 @@ def main():
 
 if __name__ == "__main__":
     main() 
+
+###########
+##Fast API routing for web page and getting natural language query from users
+
+from fastapi import FastAPI, Request, Form
+from fastapi.responses import HTMLResponse
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+
+app = FastAPI()
+
+# Allow CORS for testing purposes
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Load schema (you can replace this with your actual schema file path)
+#SCHEMA_FILE = "path/to/your/schema.json"
+#table_schema = load_schema_from_file(SCHEMA_FILE)
+
+# Set up MCP servers (ClickHouse and Grafana)
+clickhouse_server, grafana_server = None, None
+
+
+@app.on_event("startup")
+async def startup_event():
+    """Initialize MCP servers on startup."""
+    global clickhouse_server, grafana_server
+    clickhouse_server, grafana_server = await setup_mcp_servers()
+
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    """Clean up MCP servers on shutdown."""
+    global clickhouse_server, grafana_server
+    if clickhouse_server:
+        print("Cleaning up ClickHouse MCP server...")
+        # await clickhouse_server.cleanup()
+    if grafana_server:
+        print("Cleaning up Grafana MCP server...")
+        # await grafana_server.cleanup()
+
+
+@app.get("/", response_class=HTMLResponse)
+async def index():
+    """Serve the index page with a form to input the natural language query."""
+    try:
+        with open("index.html", "r") as file:
+            html_content = file.read()
+        return HTMLResponse(content=html_content)
+    except FileNotFoundError:
+        return HTMLResponse(content="<h1>Index page not found</h1>", status_code=404)
+
+# Define the request body schema
+class PromptRequest(BaseModel):
+    prompt: str
+
+@app.post("/prompt")
+async def prompt(request: PromptRequest):
+    """Process the user's natural language query and return the generated SQL."""
+    global clickhouse_server, grafana_server
+    table_schema = ""
+    try:
+        # Extract the prompt from the request
+        prompt = request.prompt
+        print(prompt)
+        # Process the query using the AI agent
+        jsonfile = "json-templates/createdashboarddemo.json"
+        sql_query = await process_query_async(prompt, table_schema, verbose=False, clickhouse_server=clickhouse_server, grafana_server=grafana_server)
+        dashboard_url = await process_grafana_asynch(grafana_server, sql_query, jsonfile)
+        return {"status": "success", "query": prompt, "dashboard": dashboard_url}
+    except Exception as e:
+        return {"status": "error", "message": str(e)}
